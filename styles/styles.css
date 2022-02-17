@@ -1,12 +1,15 @@
 body {
-  margin: 0;
   font: 14px/1.4 Arial, sans-serif;
 }
 .column-wrapper {
   padding: 0 50px;
 }
+.section-search {
+  display: flex;
+  padding-top: 50px;
+}
 .searching-service {
-  margin-top: 50px;
+  width: 70%;
 }
 .search-field {
   width: 500px;
@@ -46,4 +49,10 @@ body {
   white-space: nowrap;
   overflow: hidden;
   line-height: 30px;
+}
+.recent-search-results {
+  width: 30%;
+}
+.recent-search-results__movie {
+  margin: 20px 0;
 }
