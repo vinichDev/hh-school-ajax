@@ -49,6 +49,7 @@ const addMovieToResultList = (foundResults) => {
     const searchResultItemSuggestIter = searchResultItemsSuggest.values();
 
     const movieInfoLocalStorageResultList = findResultsInLocalStorage();
+    console.log(123);
     for (const movie of movieInfoLocalStorageResultList) {
         const searchResultItemSuggest = searchResultItemSuggestIter.next().value;
         searchResultItemSuggest.children[0].style.color = 'DarkViolet';
@@ -60,6 +61,7 @@ const addMovieToResultList = (foundResults) => {
     const movieInfoSearchResultList = foundResults.slice(0, movieInfoListLength - movieInfoLocalStorageResultList.length);
     for (const movie of movieInfoSearchResultList) {
         const searchResultItemSuggest = searchResultItemSuggestIter.next().value;
+        searchResultItemSuggest.children[0].style.color = '#000';
         searchResultItemSuggest.children[0].innerHTML = movie.title;
         searchResultItemSuggest.style.display = 'block';
         searchResultItemSuggest.dataset.movieId = movie.id;
@@ -70,7 +72,6 @@ const clearSearchResultItemsSuggest = () => {
     searchResultItemNoSuggest.style.display = 'none';
     searchResultItemsSuggest.forEach((searchResultItemSuggest) => {
         searchResultItemSuggest.style.display = 'none';
-        searchResultItemSuggest.children[0].style.color = '#000';
     });
 }
 
@@ -83,7 +84,7 @@ const findResultsInLocalStorage = () => {
         console.error(e.message);
     }
     return moviesLocalStorage
-        .filter(movie => movie.title.indexOf(inputText) !== -1)
+        .filter(movie => movie.title.toLowerCase().indexOf(inputText.toLowerCase()) !== -1)
         .slice(0, 5);
 }
 
@@ -151,7 +152,6 @@ const getRecentSearchResultList = () => {
 }
 
 const updateRecentSearchResultList = (recentSearchResultList, {id, title}) => {
-    console.log(recentSearchResultList);
     recentSearchResultList.pop();
     recentSearchResultList.unshift({
         "id": id,
